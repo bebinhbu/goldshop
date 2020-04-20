@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace GoldShop.Models.Infrastructure
+﻿namespace GoldShop.Models.Infrastructure
 {
-    public interface IBaseEntity
-    {
-        bool Deleted { get; set; }
-        bool Active { get; set; }
-    }
-
     public interface IEntity<T>
     {
         T Id { get; set; }

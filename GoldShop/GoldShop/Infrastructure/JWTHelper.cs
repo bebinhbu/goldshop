@@ -32,7 +32,8 @@ namespace GoldShop.Helpers
                 expires: expires,
                 signingCredentials: creds
             );
-            return new TokenModel(new JwtSecurityTokenHandler().WriteToken(tokenProperties), tokenProperties);
+
+            return new TokenModel(new JwtSecurityTokenHandler().WriteToken(tokenProperties));
         }
     }
 }

@@ -20,6 +20,5 @@ namespace GoldShop.Extensions
 
             return app;
         }
-
     }
 }

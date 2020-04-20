@@ -22,8 +22,8 @@ namespace GoldShop.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-		public static IServiceCollection AddCustomDbContext(this IServiceCollection services,IConfiguration configuration)
-		{
+        public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
+        {
             services.AddDbContext<GoldShopDbContext>(options =>
             {
                 options
