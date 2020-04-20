@@ -1,0 +1,60 @@
+
+
+GoldShop/GoldShop/node_modules/
+GoldShop/.vs/
+GoldShop/GoldShop/logs/
+GoldShop/GoldShop/bin/
+GoldShop/GoldShop/obj/
+GoldShop/GoldShop/publish/
+GoldShop/GoldShop/publishProduction/
+GoldShop/GoldShop/wwwroot/
+GoldShop/GoldShop/logs/*.log
+GoldShop/GoldShop/logs/*.log.*
+GoldShop/GoldShop/launch.json
+GoldShop/GoldShop/tasks.json
+GoldShop/GoldShop/appsettings.Development.json
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+ClientApp/dist
+ClientApp/tmp
+ClientApp/out-tsc
+
+# dependencies
+ClientApp/node_modules
+
+# IDEs and editors
+.scannerwork
+.scannerwork/*
+ClientApp/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+*.zip
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+ClientApp/.sass-cache
+ClientApp/connect.lock
+ClientApp/coverage
+ClientApp/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+ClientApp/typings
+
+ClientApp/package-lock.json
+# System Files
+.DS_Store
+Thumbs.db
+
+sonar-project.properties
