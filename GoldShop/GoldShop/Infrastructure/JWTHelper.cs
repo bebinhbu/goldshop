@@ -25,7 +25,7 @@ namespace GoldShop.Helpers
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var expires = DateTime.Now.AddDays(Convert.ToDouble(configuration.GetValue<string>("JWTToken:JwtExpireDays")));
 
-            var tokenProperties = new JwtSecurityToken(
+            var jwtSecurityToken = new JwtSecurityToken(
                 configuration.GetValue<string>("JWTToken:JwtIssuer"),
                 configuration.GetValue<string>("JWTToken:JwtIssuer"),
                 claims,
@@ -33,7 +33,7 @@ namespace GoldShop.Helpers
                 signingCredentials: creds
             );
 
-            return new TokenModel(new JwtSecurityTokenHandler().WriteToken(tokenProperties));
+            return new TokenModel(new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken));
         }
     }
 }
