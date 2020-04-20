@@ -1,11 +1,13 @@
 using System.Reflection;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FluentValidation.AspNetCore;
 using GoldShop.Extensions;
+using Microsoft.Data.SqlClient;
+using GoldShop.Models;
 
 namespace GoldShop
 {
@@ -21,6 +23,20 @@ namespace GoldShop
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCustomDbContext(Configuration);
+
+            services.AddCustomIdentity();
+
+            services.AddJWT(Configuration);
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader());
+            });
+
             services
                 .AddControllers()
                 .AddFluentValidation(c =>
@@ -30,10 +46,22 @@ namespace GoldShop
                 });
 
             services.AddSwagger();
+            /*
+             * dependency Injection repositories
+             */
+            services.RegisterApiRepositories();
+
+            /*
+             * dependency Injection services
+             */
+            services.RegisterApiServices();
+
+            services.RegisterCustomServices();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, GoldShopDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +80,16 @@ namespace GoldShop
             {
                 endpoints.MapControllers();
             });
+
+            try
+            {
+                // ===== Create tables ======
+                context.Database.EnsureCreated();
+            }
+            catch (SqlException)
+            {
+                // retry
+            }
         }
     }
 }

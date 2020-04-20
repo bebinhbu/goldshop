@@ -16,7 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using GoldShop.Models;
-using GoldShop.Models.Infrastructure;
 
 namespace GoldShop.Extensions
 {
@@ -30,12 +29,13 @@ namespace GoldShop.Extensions
                     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                     .UseSqlServer(configuration.GetConnectionString("GoldShopConnection"));
             });
+
             return services;
         }
 
         public static IServiceCollection AddCustomIdentity(this IServiceCollection services)
         {
-            services.AddIdentity<Account, Role>(options =>
+            services.AddIdentity<Account, IdentityRole>(options =>
             {
                 // Password settings
                 options.Password.RequireDigit = true;
@@ -53,6 +53,7 @@ namespace GoldShop.Extensions
             })
             .AddEntityFrameworkStores<GoldShopDbContext>()
             .AddDefaultTokenProviders();
+
             return services;
         }
 
@@ -96,6 +97,7 @@ namespace GoldShop.Extensions
                         }
                     };
                 });
+
             return services;
         }
 
@@ -109,13 +111,13 @@ namespace GoldShop.Extensions
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
+
             return services;
         }
 
         public static IServiceCollection RegisterApiRepositories(this IServiceCollection services)
         {
             return services;
-
         }
 
         public static IServiceCollection RegisterApiServices(this IServiceCollection services)

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GoldShop.Models.Infrastructure
+namespace GoldShop.Models
 {
     public interface IAuditableEntity
     {

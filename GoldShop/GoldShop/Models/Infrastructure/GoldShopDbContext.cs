@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GoldShop.Models.Infrastructure
+namespace GoldShop.Models
 {
-    public class GoldShopDbContext : IdentityDbContext<Account, Role, string>
+    public class GoldShopDbContext : IdentityDbContext<Account, IdentityRole, string>
     {
         public GoldShopDbContext(DbContextOptions<GoldShopDbContext> options) : base(options) { }
 

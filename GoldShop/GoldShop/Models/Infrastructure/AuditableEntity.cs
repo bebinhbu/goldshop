@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GoldShop.Models.Infrastructure
+namespace GoldShop.Models
 {
     public abstract class AuditableEntity<T> : BaseEntity, IEntity<T>, IAuditableEntity
     {

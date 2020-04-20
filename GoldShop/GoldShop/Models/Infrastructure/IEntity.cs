@@ -1,4 +1,4 @@
-﻿namespace GoldShop.Models.Infrastructure
+﻿namespace GoldShop.Models
 {
     public interface IEntity<T>
     {
