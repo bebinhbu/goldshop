@@ -1,21 +1,22 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace GoldShop.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder AddCustomSwagger(this IApplicationBuilder app)
+        public static IApplicationBuilder AddCustomSwagger(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseSwagger();
-
-            app.UseSwaggerUI(c =>
+            if (env.IsDevelopment())
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            });
+                app.UseSwagger();
+
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                });
+            }
 
             return app;
         }

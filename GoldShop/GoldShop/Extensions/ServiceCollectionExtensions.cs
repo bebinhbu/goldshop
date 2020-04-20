@@ -1,5 +1,10 @@
-﻿using GoldShop.Models;
-using GoldShop.Models.Infrastructure;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -10,14 +15,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using GoldShop.Models;
+using GoldShop.Models.Infrastructure;
 
 namespace GoldShop.Extensions
 {
@@ -31,7 +30,6 @@ namespace GoldShop.Extensions
                     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
                     .UseSqlServer(configuration.GetConnectionString("GoldShopConnection"));
             });
-
             return services;
         }
 
@@ -55,7 +53,6 @@ namespace GoldShop.Extensions
             })
             .AddEntityFrameworkStores<GoldShopDbContext>()
             .AddDefaultTokenProviders();
-
             return services;
         }
 
@@ -106,13 +103,12 @@ namespace GoldShop.Extensions
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Gold Shop API", Version = "v1" });
                 c.AddFluentValidationRules();
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-
             return services;
         }
 

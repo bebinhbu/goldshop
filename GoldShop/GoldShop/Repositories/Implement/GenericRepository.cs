@@ -1,15 +1,14 @@
-﻿using GoldShop.Models.Infrastructure;
-using GoldShop.Repositories.Interface;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using GoldShop.Models.Infrastructure;
 
 namespace GoldShop.Repositories.Implement
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> where T : BaseEntity
     {
         protected GoldShopDbContext Context;
 
