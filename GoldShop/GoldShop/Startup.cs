@@ -67,7 +67,6 @@ namespace GoldShop
             //        return new BadRequestObjectResult(errors);
             //    };
             //});
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

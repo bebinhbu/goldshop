@@ -120,12 +120,14 @@ namespace GoldShop.Extensions
         public static IServiceCollection RegisterApiRepositories(this IServiceCollection services)
         {
             services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
+
             return services;
         }
 
         public static IServiceCollection RegisterApiServices(this IServiceCollection services)
         {
             services.AddScoped<IProductCategoriesService, ProductCategoriesService>();
+
             return services;
         }
 
