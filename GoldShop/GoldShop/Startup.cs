@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using GoldShop.Extensions;
 using GoldShop.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace GoldShop
 {
@@ -57,6 +57,16 @@ namespace GoldShop
             services.RegisterApiServices();
 
             services.RegisterCustomServices();
+
+            //services.Configure<ApiBehaviorOptions>(options =>
+            //{
+            //    options.InvalidModelStateResponseFactory = actionContext =>
+            //    {
+            //        ErrorModel errors = new ErrorModel();
+            //        errors.Add(actionContext.ModelState.Values.ToString());
+            //        return new BadRequestObjectResult(errors);
+            //    };
+            //});
 
         }
 

@@ -16,6 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using GoldShop.Models;
+using GoldShop.Repositories;
+using GoldShop.Services;
 
 namespace GoldShop.Extensions
 {
@@ -117,11 +119,13 @@ namespace GoldShop.Extensions
 
         public static IServiceCollection RegisterApiRepositories(this IServiceCollection services)
         {
+            services.AddScoped<IProductCategoryRepository, ProductCategoryRepository>();
             return services;
         }
 
         public static IServiceCollection RegisterApiServices(this IServiceCollection services)
         {
+            services.AddScoped<IProductCategoriesService, ProductCategoriesService>();
             return services;
         }
 
