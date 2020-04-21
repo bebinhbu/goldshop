@@ -6,8 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FluentValidation.AspNetCore;
 using GoldShop.Extensions;
-using Microsoft.Data.SqlClient;
 using GoldShop.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoldShop
 {
@@ -81,14 +81,9 @@ namespace GoldShop
                 endpoints.MapControllers();
             });
 
-            try
+            if (env.IsDevelopment())
             {
-                // ===== Create tables ======
-                context.Database.EnsureCreated();
-            }
-            catch (SqlException)
-            {
-                // retry
+                context.Database.Migrate();
             }
         }
     }

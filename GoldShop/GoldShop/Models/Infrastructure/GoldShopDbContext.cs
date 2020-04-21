@@ -8,6 +8,9 @@ namespace GoldShop.Models
     {
         public GoldShopDbContext(DbContextOptions<GoldShopDbContext> options) : base(options) { }
 
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             ConfigurationRelationship.ConfigDefaultDB(builder);
