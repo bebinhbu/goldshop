@@ -16,12 +16,11 @@ namespace GoldShop.Services
 
         public async Task<ProductCategoryResponse> Create(ProductCategoryRequest request)
         {
-            var productCategory = await _categoryRepository.Create(request,true);
-
-            if(productCategory == null)
+            if(await _categoryRepository.CheckExistName(request.Name))
             {
-                throw new Exception("Cannot create product category");
+                throw new Exception("Category name is existed");
             }
+            var productCategory = await _categoryRepository.Create(request,true);
 
             return new ProductCategoryResponse(productCategory);
         }

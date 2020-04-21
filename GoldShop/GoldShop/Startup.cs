@@ -74,6 +74,8 @@ namespace GoldShop
 
             app.UseAuthorization();
 
+            app.ConfigureCustomExceptionMiddleware();
+
             app.AddCustomSwagger(env);
 
             app.UseEndpoints(endpoints =>

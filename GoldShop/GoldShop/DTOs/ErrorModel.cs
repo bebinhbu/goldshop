@@ -1,24 +1,20 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace GoldShop.DTOs
 {
-    public class ErrorModel
+    public class ErrorDetails
     {
-        public List<string> Errors = new List<string>();
-        public bool IsEmpty
-        {
-            get
-            {
-                return !this.Errors.Any();
-            }
-        }
+        public int StatusCode { get; set; }
+        public string Message { get; set; }
 
-        public void Add(string error)
+
+        public override string ToString()
         {
-            Errors.Add(error);
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

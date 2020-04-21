@@ -1,9 +1,5 @@
 ﻿using GoldShop.Models;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GoldShop.DTOs
 {
@@ -19,11 +15,5 @@ namespace GoldShop.DTOs
             Name = productCategory.Name;
             Description = productCategory.Description;
         }
-    }
-
-    public class ProductCategoryRequest
-    {
-        public string Name { get; set; }
-        public string Description { get; set; }
     }
 }

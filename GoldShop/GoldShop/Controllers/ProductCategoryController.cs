@@ -11,7 +11,7 @@ namespace GoldShop.Controllers
     [ApiController]
     public class ProductCategoryController : ControllerBase
     {
-        IProductCategoriesService _productCategoriesService;
+        private readonly IProductCategoriesService _productCategoriesService;
 
         public ProductCategoryController(IProductCategoriesService productCategoriesService)
         {
@@ -20,23 +20,12 @@ namespace GoldShop.Controllers
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProductCategoryResponse>> Create([FromBody] ProductCategoryRequest request)
         {
-            ErrorModel errors = new ErrorModel();
-            try
-            {
-                ProductCategoryResponse productCategoryResponse = await _productCategoriesService.Create(request);
-                if(productCategoryResponse != null)
-                {
-                    return Ok(productCategoryResponse);
-                }
-            }
-            catch(Exception ex)
-            {
-                errors.Add(ex.Message);
-            }
-            return BadRequest(errors);
+            ProductCategoryResponse productCategoryResponse = await _productCategoriesService.Create(request);
+
+            return Ok(productCategoryResponse);
         }
     }
 }
