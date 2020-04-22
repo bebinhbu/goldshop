@@ -35,7 +35,6 @@ namespace GoldShop.Middlewares
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
-                StatusCode = context.Response.StatusCode,
                 Message = exception.Message
             }.ToString());
         }
