@@ -3,14 +3,15 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using GoldShop.DTOs;
+using GoldShop.Helpers;
 
 namespace GoldShop.Middlewares
 {
-    public class ExceptionMiddleware
+    public class CustomExceptionHandlerMiddleware
     {
         private readonly RequestDelegate _next;
 
-        public ExceptionMiddleware(RequestDelegate next)
+        public CustomExceptionHandlerMiddleware(RequestDelegate next)
         {
             _next = next;
         }
@@ -21,13 +22,13 @@ namespace GoldShop.Middlewares
             {
                 await _next(httpContext);
             }
-            catch (Exception ex)
+            catch (CustomException ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private Task HandleExceptionAsync(HttpContext context, CustomException exception)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;

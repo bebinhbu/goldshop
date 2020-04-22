@@ -70,11 +70,11 @@ namespace GoldShop
 
             app.UseHttpsRedirection();
 
+            app.ConfigureCustomExceptionMiddleware();
+
             app.UseRouting();
 
             app.UseAuthorization();
-
-            app.ConfigureCustomExceptionMiddleware();
 
             app.AddCustomSwagger(env);
 

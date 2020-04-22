@@ -23,7 +23,7 @@ namespace GoldShop.Controllers
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProductCategoryResponse>> Create([FromBody] ProductCategoryRequest request)
         {
-            ProductCategoryResponse productCategoryResponse = await _productCategoriesService.Create(request);
+            var productCategoryResponse = await _productCategoriesService.Create(request);
 
             return Ok(productCategoryResponse);
         }

@@ -14,7 +14,7 @@ namespace GoldShop.Repositories
             _context = context;
         }
 
-        public async Task<ProductCategory> Create(ProductCategoryRequest request,bool isCommit = true)
+        public async Task<ProductCategory> CreateAsync(ProductCategoryRequest request,bool isCommit = true)
         {
             ProductCategory productCategory = new ProductCategory()
             {
@@ -33,14 +33,14 @@ namespace GoldShop.Repositories
             return productCategory;
         }
 
-        public async Task<bool> FindById(Guid id)
+        public async Task<bool> FindByIdAsync(Guid id)
         {
-            return await _context.ProductCategories.AnyAsync(x => x.DeletedAt == null && x.Id == id);
+            return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Id == id);
         }
 
-        public async Task<bool> CheckExistName(string name)
+        public async Task<bool> CheckExistNameAsync(string name)
         {
-            return await _context.ProductCategories.AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == name.ToLower());
+            return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == name.ToLower());
         }
     }
 }

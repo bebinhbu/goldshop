@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using GoldShop.DTOs;
+using GoldShop.Helpers;
 using GoldShop.Repositories;
 
 namespace GoldShop.Services
@@ -16,11 +17,12 @@ namespace GoldShop.Services
 
         public async Task<ProductCategoryResponse> Create(ProductCategoryRequest request)
         {
-            if(await _categoryRepository.CheckExistName(request.Name))
+            if(await _categoryRepository.CheckExistNameAsync(request.Name))
             {
-                throw new Exception("Category name is existed");
+                throw new CustomException("Category name is existed");
             }
-            var productCategory = await _categoryRepository.Create(request,true);
+
+            var productCategory = await _categoryRepository.CreateAsync(request,true);
 
             return new ProductCategoryResponse(productCategory);
         }
