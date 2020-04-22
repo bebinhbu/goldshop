@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using FluentValidation.AspNetCore;
 using GoldShop.Extensions;
 using GoldShop.Models;
+using AutoMapper;
 
 namespace GoldShop
 {
@@ -37,6 +38,8 @@ namespace GoldShop
                     .AllowAnyHeader());
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             services
                 .AddControllers()
                 .AddFluentValidation(c =>
@@ -57,7 +60,6 @@ namespace GoldShop
             services.RegisterApiServices();
 
             services.RegisterCustomServices();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

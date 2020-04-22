@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GoldShop.DTOs;
@@ -21,9 +20,9 @@ namespace GoldShop.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProductCategoryResponse>> Create([FromBody] ProductCategoryRequest request)
+        public async Task<ActionResult<ProductCategoryDTO>> Create([FromBody] ProductCategoryRequest request)
         {
-            var productCategoryResponse = await _productCategoriesService.Create(request);
+            var productCategoryResponse = await _productCategoriesService.CreateAsync(request);
 
             return Ok(productCategoryResponse);
         }

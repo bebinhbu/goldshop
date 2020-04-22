@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 using GoldShop.DTOs;
 using GoldShop.Models;
 
@@ -9,12 +10,14 @@ namespace GoldShop.Repositories
     public class ProductCategoryRepository : IProductCategoryRepository
     {
         private readonly GoldShopDbContext _context;
-        public ProductCategoryRepository(GoldShopDbContext context)
+        private readonly IMapper _mapper;
+        public ProductCategoryRepository(GoldShopDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<ProductCategory> CreateAsync(ProductCategoryRequest request,bool isCommit = true)
+        public async Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request,bool isCommit = true)
         {
             ProductCategory productCategory = new ProductCategory()
             {
@@ -24,13 +27,14 @@ namespace GoldShop.Repositories
                 Active = true,
                 CreatedDate = DateTime.Now
             };
+
             await _context.AddAsync(productCategory);
             if(isCommit)
             {
                 await _context.SaveChangesAsync();
             }
 
-            return productCategory;
+            return _mapper.Map<ProductCategoryDTO>(productCategory);
         }
 
         public async Task<bool> FindByIdAsync(Guid id)

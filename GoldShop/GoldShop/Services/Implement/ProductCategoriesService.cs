@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using GoldShop.DTOs;
 using GoldShop.Helpers;
 using GoldShop.Repositories;
@@ -15,7 +14,7 @@ namespace GoldShop.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<ProductCategoryResponse> Create(ProductCategoryRequest request)
+        public async Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request)
         {
             if(await _categoryRepository.CheckExistNameAsync(request.Name))
             {
@@ -24,7 +23,7 @@ namespace GoldShop.Services
 
             var productCategory = await _categoryRepository.CreateAsync(request,true);
 
-            return new ProductCategoryResponse(productCategory);
+            return productCategory;
         }
     }
 }

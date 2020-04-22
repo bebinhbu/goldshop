@@ -5,6 +5,6 @@ namespace GoldShop.Services
 {
     public interface IProductCategoriesService
     {
-        Task<ProductCategoryResponse> Create(ProductCategoryRequest request);
+        Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request);
     }
 }
