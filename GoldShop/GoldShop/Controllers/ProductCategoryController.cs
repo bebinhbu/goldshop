@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GoldShop.DTOs;
 using GoldShop.Services;
+using System;
 
 namespace GoldShop.Controllers
 {
@@ -17,12 +18,33 @@ namespace GoldShop.Controllers
             _productCategoriesService = productCategoriesService;
         }
 
+        ///<summary>
+        ///Create Product Category
+        ///</summary>
+        ///<param name="request"></param>
+        ///<returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<ProductCategoryDTO>> Create([FromBody] ProductCategoryRequest request)
         {
             var productCategoryResponse = await _productCategoriesService.CreateAsync(request);
+
+            return Ok(productCategoryResponse);
+        }
+
+        ///<summary>
+        ///Update Product Category
+        ///</summary>
+        ///<param name="id"></param>
+        ///<param name="request"></param>
+        ///<returns></returns>
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ProductCategoryDTO>> Update(Guid id,[FromBody] ProductCategoryRequest request)
+        {
+            var productCategoryResponse = await _productCategoriesService.UpdateAsync(id,request);
 
             return Ok(productCategoryResponse);
         }

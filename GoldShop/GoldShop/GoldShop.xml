@@ -4,5 +4,73 @@
         <name>GoldShop</name>
     </assembly>
     <members>
+        <member name="M:GoldShop.Controllers.ProductCategoryController.Create(GoldShop.DTOs.ProductCategoryRequest)">
+            <summary>
+            Create Product Category
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Controllers.ProductCategoryController.Update(System.Guid,GoldShop.DTOs.ProductCategoryRequest)">
+            <summary>
+            Update Product Category
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Repositories.IProductCategoryRepository.CreateAsync(GoldShop.DTOs.ProductCategoryRequest,System.Boolean)">
+            <summary>
+            Create Product Category Async
+            </summary>
+            <param name="request"></param>
+            <param name="isCommit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Repositories.IProductCategoryRepository.CheckExistCategoryByIdAsync(System.Guid)">
+            <summary>
+            Check Exist Category By Id Async
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Repositories.IProductCategoryRepository.CheckExistNameAsync(System.String)">
+            <summary>
+            Check Exist Category By Name Async
+            </summary>
+            <param name="categoryName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Repositories.IProductCategoryRepository.UpdateAsync(System.Guid,GoldShop.DTOs.ProductCategoryRequest,System.Boolean)">
+            <summary>
+            Update Product Category Async
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <param name="isCommit"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Repositories.IProductCategoryRepository.ExistCategoryByIdAsync(System.Guid)">
+            <summary>
+            Find Category By Id Async
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Services.IProductCategoriesService.CreateAsync(GoldShop.DTOs.ProductCategoryRequest)">
+            <summary>
+            Create Category Async
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GoldShop.Services.IProductCategoriesService.UpdateAsync(System.Guid,GoldShop.DTOs.ProductCategoryRequest)">
+            <summary>
+            Update Category Async
+            </summary>
+            <param name="id"></param>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
