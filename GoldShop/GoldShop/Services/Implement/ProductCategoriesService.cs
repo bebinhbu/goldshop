@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 using GoldShop.DTOs;
 using GoldShop.Helpers;
 using GoldShop.Repositories;
@@ -18,7 +19,7 @@ namespace GoldShop.Services
         {
             if(await _categoryRepository.CheckExistNameAsync(request.Name))
             {
-                throw new CustomException("Category name is existed");
+                throw new CustomException(HttpStatusCode.BadRequest,"Category name is existed");
             }
 
             var productCategory = await _categoryRepository.CreateAsync(request,true);

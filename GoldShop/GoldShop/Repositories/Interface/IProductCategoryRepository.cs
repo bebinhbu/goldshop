@@ -8,7 +8,7 @@ namespace GoldShop.Repositories
     public interface IProductCategoryRepository
     {
         Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request, bool isCommit = true);
-        Task<bool> FindByIdAsync(Guid id);
-        Task<bool> CheckExistNameAsync(string name);
+        Task<bool> ExistCategoryByIdAsync(Guid id);
+        Task<bool> CheckExistNameAsync(string categoryName);
     }
 }

@@ -31,7 +31,7 @@ namespace GoldShop.Middlewares
         private Task HandleExceptionAsync(HttpContext context, CustomException exception)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.StatusCode = (int)exception.StatusCode;
 
             return context.Response.WriteAsync(new ErrorDetails()
             {
