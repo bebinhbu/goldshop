@@ -19,14 +19,8 @@ namespace GoldShop.Repositories
 
         public async Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request,bool isCommit = true)
         {
-            ProductCategory productCategory = new ProductCategory()
-            {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-                Description = request.Description,
-                Active = true,
-                CreatedDate = DateTime.Now
-            };
+
+            var productCategory = _mapper.Map<ProductCategory>(request);
 
             await _context.AddAsync(productCategory);
             if(isCommit)
