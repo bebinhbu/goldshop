@@ -17,6 +17,11 @@ namespace GoldShop.Controllers
             _productCategoriesService = productCategoriesService;
         }
 
+        ///<summary>
+        ///Create Product Category
+        ///</summary>
+        ///<param name="request"></param>
+        ///<returns></returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
