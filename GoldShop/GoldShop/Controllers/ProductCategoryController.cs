@@ -20,8 +20,8 @@ namespace GoldShop.Controllers
         ///<summary>
         ///Create Product Category
         ///</summary>
-        ///<param name="request"></param>
-        ///<returns></returns>
+        ///<param name="request">Category information</param>
+        ///<returns>The new category information</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]

@@ -10,6 +10,10 @@ namespace GoldShop.DTOs
     {
         public string Message { get; set; }
 
+        public ErrorDetails(string message)
+        {
+            Message = message;
+        }
 
         public override string ToString()
         {
