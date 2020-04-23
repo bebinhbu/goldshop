@@ -33,10 +33,7 @@ namespace GoldShop.Middlewares
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)exception.StatusCode;
 
-            return context.Response.WriteAsync(new ErrorDetails()
-            {
-                Message = exception.Message
-            }.ToString());
+            return context.Response.WriteAsync(new ErrorDetails(exception.Message).ToString());
         }
     }
 }
