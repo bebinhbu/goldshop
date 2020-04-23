@@ -10,8 +10,21 @@ namespace GoldShop.DTOs
         {
             CreateMap<ProductCategory, ProductCategoryDTO>();
             CreateMap<ProductCategoryRequest, ProductCategory>()
-                    .ForMember(d => d.CreatedDate, o => o.MapFrom(s => DateTime.Now))
-                    .ForMember(d => d.Active, o => o.MapFrom(s => true));
+                .ForMember(dest => dest.CreatedDate, opt =>
+                {
+                    opt.PreCondition(src => (src.Id == null));
+                    opt.MapFrom(s => DateTime.Now);
+                })
+                .ForMember(dest => dest.Active, opt =>
+                {
+                    opt.PreCondition(src => (src.Id == null));
+                    opt.MapFrom(s => true);
+                })
+                .ForMember(dest => dest.UpdatedDate, opt =>
+                {
+                    opt.PreCondition(src => (src.Id != null));
+                    opt.MapFrom(s => DateTime.Now);
+                });
         }
     }
 }

@@ -16,17 +16,32 @@ namespace GoldShop.Repositories
         Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request, bool isCommit = true);
 
         ///<summary>
+        ///Update Product Category Async
+        ///</summary>
+        ///<param name="request"></param>
+        ///<param name="isCommit"></param>
+        ///<returns></returns>
+        Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request, bool isCommit = true);
+
+        ///<summary>
         ///Check Exist Category By Id Async
         ///</summary>
         ///<param name="id"></param>
         ///<returns></returns>
-        Task<bool> ExistCategoryByIdAsync(Guid id);
+        Task<bool> CheckExistCategoryByIdAsync(Guid id);
 
         ///<summary>
         ///Check Exist Category By Name Async
         ///</summary>
         ///<param name="categoryName"></param>
         ///<returns></returns>
-        Task<bool> CheckExistNameAsync(string categoryName);
+        Task<bool> CheckExistNameAsync(string categoryName,Guid? id = null);
+
+        ///<summary>
+        ///Exist Category By Id Async
+        ///</summary>
+        ///<param name="id"></param>
+        ///<returns></returns>
+        Task<ProductCategory> ExistCategoryByIdAsync(Guid id);
     }
 }

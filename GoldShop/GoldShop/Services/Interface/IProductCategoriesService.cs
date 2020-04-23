@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using GoldShop.DTOs;
 
 namespace GoldShop.Services
@@ -11,5 +12,12 @@ namespace GoldShop.Services
         ///<param name="request"></param>
         ///<returns></returns>
         Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request);
+
+        ///<summary>
+        ///Update Category Async
+        ///</summary>
+        ///<param name="request"></param>
+        ///<returns></returns>
+        Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request);
     }
 }

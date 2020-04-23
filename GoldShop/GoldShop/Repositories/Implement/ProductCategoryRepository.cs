@@ -30,14 +30,35 @@ namespace GoldShop.Repositories
             return _mapper.Map<ProductCategoryDTO>(productCategory);
         }
 
-        public async Task<bool> ExistCategoryByIdAsync(Guid id)
+        public async Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request, bool isCommit = true)
+        {
+            var productCategory = await ExistCategoryByIdAsync(request.Id.Value);
+
+            _context.Update(_mapper.Map(request, productCategory));
+
+            if (isCommit)
+            {
+                await _context.SaveChangesAsync();
+            }
+
+            return _mapper.Map<ProductCategoryDTO>(productCategory);
+        }
+
+        public async Task<bool> CheckExistCategoryByIdAsync(Guid id)
         {
             return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Id == id);
         }
 
-        public async Task<bool> CheckExistNameAsync(string categoryName)
+        public async Task<bool> CheckExistNameAsync(string categoryName,Guid? id = null)
         {
-            return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == categoryName.ToLower());
+            return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == categoryName.ToLower() && x.Id != id);
         }
+
+        public async Task<ProductCategory> ExistCategoryByIdAsync(Guid id)
+        {
+            return await _context.ProductCategories.AsNoTracking().FirstOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+        }
+
+
     }
 }
