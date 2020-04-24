@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using GoldShop.DTOs;
 using GoldShop.Helpers;
@@ -15,7 +16,7 @@ namespace GoldShop.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request)
+        public async Task<ProductCategoryDTO> CreateCategoryAsync(ProductCategoryRequest request)
         {
             if(await _categoryRepository.CheckExistNameAsync(request.Name))
             {
@@ -23,6 +24,23 @@ namespace GoldShop.Services
             }
 
             var productCategory = await _categoryRepository.CreateAsync(request,true);
+
+            return productCategory;
+        }
+
+        public async Task<ProductCategoryDTO> UpdateCategoryAsync(ProductCategoryRequest request)
+        {
+            if(!await _categoryRepository.CheckExistCategoryByIdAsync(request.Id.Value))
+            {
+                throw new CustomException(HttpStatusCode.NotFound, "Product category is not found");
+            }
+
+            if (await _categoryRepository.CheckExistNameAsync(request.Name, request.Id.Value))
+            {
+                throw new CustomException(HttpStatusCode.BadRequest, "Category name is existed");
+            }
+
+            var productCategory = await _categoryRepository.UpdateAsync(request, true);
 
             return productCategory;
         }

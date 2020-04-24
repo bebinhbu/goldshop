@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using GoldShop.DTOs;
@@ -18,16 +19,34 @@ namespace GoldShop.Controllers
         }
 
         ///<summary>
-        ///Create Product Category
+        ///Create Product Category Async
         ///</summary>
         ///<param name="request">Category information</param>
         ///<returns>The new category information</returns>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails),StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProductCategoryDTO>> Create([FromBody] ProductCategoryRequest request)
+        public async Task<ActionResult<ProductCategoryDTO>> CreateCategoryAsync([FromBody] ProductCategoryRequest request)
         {
-            var productCategoryResponse = await _productCategoriesService.CreateAsync(request);
+            var productCategoryResponse = await _productCategoriesService.CreateCategoryAsync(request);
+
+            return Ok(productCategoryResponse);
+        }
+
+        ///<summary>
+        ///Update Product Category Async
+        ///</summary>
+        ///<param name="id">Category Id</param>
+        ///<param name="request">Category information</param>
+        ///<returns>The new category information</returns>
+        [HttpPut("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<ProductCategoryDTO>> UpdateCategoryAsync(Guid id, [FromBody] ProductCategoryRequest request)
+        {
+            request.Id = id;
+
+            var productCategoryResponse = await _productCategoriesService.UpdateCategoryAsync(request);
 
             return Ok(productCategoryResponse);
         }
