@@ -64,8 +64,8 @@ namespace GoldShop.Repositories
         public async Task<ProductCategory> GetCategoryByIdAsync(Guid id, bool isTrackingEnable = false)
         {
             return isTrackingEnable
-           ? await _context.ProductCategories.AsTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id)
-           : await _context.ProductCategories.AsNoTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+                ? await _context.ProductCategories.AsTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id)
+                : await _context.ProductCategories.AsNoTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
         }
     }
 }
