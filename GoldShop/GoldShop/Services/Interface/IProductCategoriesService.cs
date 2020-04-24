@@ -11,13 +11,13 @@ namespace GoldShop.Services
         ///</summary>
         ///<param name="request"></param>
         ///<returns></returns>
-        Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request);
+        Task<ProductCategoryDTO> CreateCategoryAsync(ProductCategoryRequest request);
 
         ///<summary>
         ///Update Category Async
         ///</summary>
         ///<param name="request"></param>
         ///<returns></returns>
-        Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request);
+        Task<ProductCategoryDTO> UpdateCategoryAsync(ProductCategoryRequest request);
     }
 }

@@ -32,24 +32,23 @@ namespace GoldShop.Repositories
 
         public async Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request, bool isCommit = true)
         {
-            var productCategory = await GetCategoryByIdAsync(request.Id.Value);
-
             try
             {
-                _context.Database.AutoTransactionsEnabled = true;
-                productCategory = _mapper.Map(request, productCategory);
+                _context.ChangeTracker.AutoDetectChangesEnabled = true;
 
+                var productCategory = await GetCategoryByIdAsync(request.Id.Value,true);
+                productCategory = _mapper.Map(request, productCategory);
                 if (isCommit)
                 {
                     await _context.SaveChangesAsync();
                 }
+
+                return _mapper.Map<ProductCategoryDTO>(productCategory);
             }
             finally
             {
-                _context.Database.AutoTransactionsEnabled = false;
+                _context.ChangeTracker.AutoDetectChangesEnabled = false;
             }
-
-            return _mapper.Map<ProductCategoryDTO>(productCategory);
         }
 
         public async Task<bool> CheckExistCategoryByIdAsync(Guid id)
@@ -62,11 +61,16 @@ namespace GoldShop.Repositories
             return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == categoryName.ToLower() && x.Id != id);
         }
 
-        public async Task<ProductCategory> GetCategoryByIdAsync(Guid id)
+        public async Task<ProductCategory> GetCategoryByIdAsync(Guid id, bool isTrackingEnable = false)
         {
-            return await _context.ProductCategories.AsNoTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+            if (!isTrackingEnable)
+            {
+                return await _context.ProductCategories.AsNoTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+            }
+            else
+            {
+                return await _context.ProductCategories.AsTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+            }
         }
-
-
     }
 }

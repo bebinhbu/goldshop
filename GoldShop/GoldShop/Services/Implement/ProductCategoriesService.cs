@@ -16,7 +16,7 @@ namespace GoldShop.Services
             _categoryRepository = categoryRepository;
         }
 
-        public async Task<ProductCategoryDTO> CreateAsync(ProductCategoryRequest request)
+        public async Task<ProductCategoryDTO> CreateCategoryAsync(ProductCategoryRequest request)
         {
             if(await _categoryRepository.CheckExistNameAsync(request.Name))
             {
@@ -28,13 +28,13 @@ namespace GoldShop.Services
             return productCategory;
         }
 
-        public async Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request)
+        public async Task<ProductCategoryDTO> UpdateCategoryAsync(ProductCategoryRequest request)
         {
             if(!await _categoryRepository.CheckExistCategoryByIdAsync(request.Id.Value))
             {
-                throw new CustomException(HttpStatusCode.BadRequest, "Product category is not found");
+                throw new CustomException(HttpStatusCode.NotFound, "Product category is not found");
             }
-            else if (await _categoryRepository.CheckExistNameAsync(request.Name,request.Id.Value))
+            else if (await _categoryRepository.CheckExistNameAsync(request.Name, request.Id.Value))
             {
                 throw new CustomException(HttpStatusCode.BadRequest, "Category name is existed");
             }

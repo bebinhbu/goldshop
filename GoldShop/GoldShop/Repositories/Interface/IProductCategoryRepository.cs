@@ -41,7 +41,8 @@ namespace GoldShop.Repositories
         ///Get Category By Id Async
         ///</summary>
         ///<param name="id"></param>
+        ///<param name="isTrackingEnable"></param>
         ///<returns></returns>
-        Task<ProductCategory> GetCategoryByIdAsync(Guid id);
+        Task<ProductCategory> GetCategoryByIdAsync(Guid id, bool isTrackingEnable = false);
     }
 }
