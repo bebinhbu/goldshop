@@ -12,17 +12,17 @@ namespace GoldShop.DTOs
             CreateMap<ProductCategoryRequest, ProductCategory>()
                 .ForMember(dest => dest.CreatedDate, opt =>
                 {
-                    opt.PreCondition(src => (src.Id == null));
+                    opt.PreCondition(src => (!src.Id.HasValue));
                     opt.MapFrom(s => DateTime.Now);
                 })
                 .ForMember(dest => dest.Active, opt =>
                 {
-                    opt.PreCondition(src => (src.Id == null));
+                    opt.PreCondition(src => (!src.Id.HasValue));
                     opt.MapFrom(s => true);
                 })
                 .ForMember(dest => dest.UpdatedDate, opt =>
                 {
-                    opt.PreCondition(src => (src.Id != null));
+                    opt.PreCondition(src => (src.Id.HasValue));
                     opt.MapFrom(s => DateTime.Now);
                 });
         }

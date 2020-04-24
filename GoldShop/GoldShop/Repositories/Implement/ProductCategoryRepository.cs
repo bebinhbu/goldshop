@@ -32,13 +32,21 @@ namespace GoldShop.Repositories
 
         public async Task<ProductCategoryDTO> UpdateAsync(ProductCategoryRequest request, bool isCommit = true)
         {
-            var productCategory = await ExistCategoryByIdAsync(request.Id.Value);
+            var productCategory = await GetCategoryByIdAsync(request.Id.Value);
 
-            _context.Update(_mapper.Map(request, productCategory));
-
-            if (isCommit)
+            try
             {
-                await _context.SaveChangesAsync();
+                _context.Database.AutoTransactionsEnabled = true;
+                productCategory = _mapper.Map(request, productCategory);
+
+                if (isCommit)
+                {
+                    await _context.SaveChangesAsync();
+                }
+            }
+            finally
+            {
+                _context.Database.AutoTransactionsEnabled = false;
             }
 
             return _mapper.Map<ProductCategoryDTO>(productCategory);
@@ -49,14 +57,14 @@ namespace GoldShop.Repositories
             return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Id == id);
         }
 
-        public async Task<bool> CheckExistNameAsync(string categoryName,Guid? id = null)
+        public async Task<bool> CheckExistNameAsync(string categoryName, Guid? id = null)
         {
             return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Name.ToLower() == categoryName.ToLower() && x.Id != id);
         }
 
-        public async Task<ProductCategory> ExistCategoryByIdAsync(Guid id)
+        public async Task<ProductCategory> GetCategoryByIdAsync(Guid id)
         {
-            return await _context.ProductCategories.AsNoTracking().FirstOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
+            return await _context.ProductCategories.AsNoTracking().SingleOrDefaultAsync(x => x.DeletedAt == null && x.Id == id);
         }
 
 

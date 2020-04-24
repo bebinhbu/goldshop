@@ -39,10 +39,10 @@ namespace GoldShop.Controllers
         ///<param name="id">Category Id</param>
         ///<param name="request">Category information</param>
         ///<returns>The new category information</returns>
-        [HttpPut]
+        [HttpPut("{id:guid}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProductCategoryDTO>> Update(Guid id,[FromBody] ProductCategoryRequest request)
+        public async Task<ActionResult<ProductCategoryDTO>> Update(Guid id, [FromBody] ProductCategoryRequest request)
         {
             request.Id = id;
 

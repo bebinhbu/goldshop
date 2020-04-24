@@ -35,13 +35,13 @@ namespace GoldShop.Repositories
         ///</summary>
         ///<param name="categoryName"></param>
         ///<returns></returns>
-        Task<bool> CheckExistNameAsync(string categoryName,Guid? id = null);
+        Task<bool> CheckExistNameAsync(string categoryName, Guid? id = null);
 
         ///<summary>
-        ///Exist Category By Id Async
+        ///Get Category By Id Async
         ///</summary>
         ///<param name="id"></param>
         ///<returns></returns>
-        Task<ProductCategory> ExistCategoryByIdAsync(Guid id);
+        Task<ProductCategory> GetCategoryByIdAsync(Guid id);
     }
 }
