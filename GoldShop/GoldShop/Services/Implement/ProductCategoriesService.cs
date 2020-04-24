@@ -34,7 +34,7 @@ namespace GoldShop.Services
             {
                 throw new CustomException(HttpStatusCode.NotFound, "Product category is not found");
             }
-            else if (await _categoryRepository.CheckExistNameAsync(request.Name, request.Id.Value))
+            if (await _categoryRepository.CheckExistNameAsync(request.Name, request.Id.Value))
             {
                 throw new CustomException(HttpStatusCode.BadRequest, "Category name is existed");
             }
