@@ -19,5 +19,12 @@ namespace GoldShop.Services
         ///<param name="request"></param>
         ///<returns></returns>
         Task<ProductCategoryDTO> UpdateCategoryAsync(ProductCategoryRequest request);
+
+        ///<summary>
+        ///Delete Category Async
+        ///</summary>
+        ///<param name="id"></param>
+        ///<returns></returns>
+        Task<ProductCategoryDTO> DeleteCategoryAsync(Guid id);
     }
 }
