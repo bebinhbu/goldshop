@@ -50,5 +50,20 @@ namespace GoldShop.Controllers
 
             return Ok(productCategoryResponse);
         }
+
+        ///<summary>
+        ///Delete Product Category Async
+        ///</summary>
+        ///<param name="id">Category Id</param>
+        ///<returns>The id of old category information have deleted</returns>
+        [HttpDelete("{id:guid}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorDetails), StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Guid>> DeleteCategoryAsync(Guid id)
+        {
+            var productCategoryIdResponse = await _productCategoriesService.DeleteCategoryAsync(id);
+
+            return Ok(productCategoryIdResponse);
+        }
     }
 }

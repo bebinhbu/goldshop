@@ -44,5 +44,17 @@ namespace GoldShop.Services
 
             return productCategory;
         }
+
+        public async Task<Guid> DeleteCategoryAsync(Guid id)
+        {
+            if (!await _categoryRepository.CheckExistCategoryByIdAsync(id))
+            {
+                throw new CustomException(HttpStatusCode.NotFound, "Product category is not found");
+            }
+
+            var productCategory = await _categoryRepository.DeleteCategory(id, true);
+
+            return productCategory;
+        }
     }
 }

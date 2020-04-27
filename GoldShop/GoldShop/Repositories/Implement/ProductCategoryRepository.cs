@@ -51,6 +51,24 @@ namespace GoldShop.Repositories
             }
         }
 
+        public async Task<Guid> DeleteCategory(Guid id,bool isCommit = true)
+        {
+            var productCategory = new ProductCategory()
+            {
+                Id = id
+            };
+            productCategory.MakeAsDelete();
+
+            _context.Entry(productCategory).Property(x => x.DeletedAt).IsModified = true;
+
+            if (isCommit)
+            {
+                await _context.SaveChangesAsync();
+            }
+
+            return id;
+        }
+
         public async Task<bool> CheckExistCategoryByIdAsync(Guid id)
         {
             return await _context.ProductCategories.AsNoTracking().AnyAsync(x => x.DeletedAt == null && x.Id == id);
