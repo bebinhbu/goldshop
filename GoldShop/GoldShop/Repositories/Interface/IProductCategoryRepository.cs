@@ -51,6 +51,6 @@ namespace GoldShop.Repositories
         ///<param name="id"></param>
         ///<param name="isCommit"></param>
         ///<returns></returns>
-        Task<ProductCategoryDTO> DeleteCategory(Guid id, bool isCommit = true);
+        Task<Guid> DeleteCategory(Guid id, bool isCommit = true);
     }
 }

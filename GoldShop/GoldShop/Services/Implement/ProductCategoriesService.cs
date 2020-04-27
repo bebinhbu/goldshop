@@ -45,7 +45,7 @@ namespace GoldShop.Services
             return productCategory;
         }
 
-        public async Task<ProductCategoryDTO> DeleteCategoryAsync(Guid id)
+        public async Task<Guid> DeleteCategoryAsync(Guid id)
         {
             if (!await _categoryRepository.CheckExistCategoryByIdAsync(id))
             {

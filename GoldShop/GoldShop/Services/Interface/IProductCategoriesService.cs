@@ -25,6 +25,6 @@ namespace GoldShop.Services
         ///</summary>
         ///<param name="id"></param>
         ///<returns></returns>
-        Task<ProductCategoryDTO> DeleteCategoryAsync(Guid id);
+        Task<Guid> DeleteCategoryAsync(Guid id);
     }
 }
